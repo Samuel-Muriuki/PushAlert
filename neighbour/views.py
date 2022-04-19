@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .models import NeighbourHood, Business, Post, Profile
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -139,4 +140,18 @@ def update_post(request, id, post_id):
     else:
         post_form = PostForm(instance=instance)
     return render(request, 'all-neighbour/post.html', {'post_form': post_form, 'title': title})
+
+@login_required(login_url='login')
+def update_hood(request, id):
+    title = 'UPDATE HOOD'
+    instance = NeighbourHood.objects.get(id=id)
+    if request.method == 'POST':
+        form = HoodForm(request.POST, request.FILES, instance=instance)
+        if form.is_valid():
+            form.save()
+        messages.success(request, ('Hood Updated Successfullly'))
+        return redirect('hoods')
+    else:
+        form = HoodForm(instance=instance)
+    return render(request, 'all-neighbour/newhood.html', {'form': form, 'title': title})
 
