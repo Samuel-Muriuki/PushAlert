@@ -63,3 +63,15 @@ def new_hood(request):
         form = HoodForm()
     return render(request, 'all-neighbour/newhood.html', {'form': form})
 
+@login_required(login_url='login')
+def user_hood(request, id):
+    current_user = request.user
+    hood = NeighbourHood.objects.get(id=id)
+    members = Profile.objects.filter(neighbourhood=hood)
+    businesses = Business.objects.filter(neighbourhood=hood)
+    posts = Post.objects.filter(neighbourhood=hood)
+    request.user.profile.neighbourhood = hood
+    request.user.profile.save()
+
+    return render(request, 'all-neighbour/user_hood.html', {'hood': hood, 'businesses': businesses, 'posts': posts, 'current_user': current_user, 'members': members})
+
