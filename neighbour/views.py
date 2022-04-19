@@ -33,6 +33,15 @@ def hoods(request):
     hoods = NeighbourHood.objects.all()
     return render(request, "all-neighbour/hoods.html", {'hoods': hoods, 'current_user': current_user})
 
+def user_profile(request, username):
+    current_user = request.user
+    user_poster = get_object_or_404(User, username=username)
+
+    if request.user == user_poster:
+        return redirect('profile', username=request.user.username)
+
+    return render(request, 'all-neighbour/member.html', {'user_poster': user_poster,'current_user': current_user})
+
 @login_required(login_url='login')
 def profile(request, username):
     current_user = request.user
