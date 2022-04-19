@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load bootstrap4 %}
+{% block content%}
+{{block.super}}
+<div class="container-fluid text-center">
+    <h1 class="font-weight-bold text-center intro">WELCOME TO THE</h1>
+    <h1 class="text-secondary">Neighbourhood</h1>
+    <h6 class="intro1">This is a place where you get to know what is happening in your neighbourhood <br>
+        be in the loop about everything happening in your neighborhood
+    </h6>
+    {% if request.user.profile.neighbourhood %}
+    {%else%}
+    <a href="{%url 'hoods'%}" class="btn mt-4 btn-primary pl-4 pr-4 font-weight-bold black">JOIN HOOD</a>
+    {%endif%}
+
+</div>
+
+
+{%endblock%}
