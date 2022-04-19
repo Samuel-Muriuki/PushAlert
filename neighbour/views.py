@@ -161,3 +161,11 @@ def delete_business(request, id, bus_id):
     business.delete_business()
     messages.info(request, ('Business Deleted'))
     return redirect('my_hood', id)
+
+@login_required(login_url='login')
+def delete_post(request, id, post_id):
+    post = Post.objects.get(id=post_id)
+    post.delete_post()
+    messages.info(request, ('Post Deleted'))
+    return redirect('my_hood', id)
+
