@@ -1,4 +1,4 @@
 venv/
 Neighbourhood/settings.py
-__pycahe__/
+__pycache__/
 .env
