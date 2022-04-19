@@ -35,3 +35,8 @@ class UpdateUserProfileForm(forms.ModelForm):
             'bio': Textarea(attrs={'cols': 20, 'rows': 5}),
         }
         
+class BusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        exclude = ('owner', 'neighbourhood')
+
