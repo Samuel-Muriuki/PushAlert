@@ -155,3 +155,9 @@ def update_hood(request, id):
         form = HoodForm(instance=instance)
     return render(request, 'all-neighbour/newhood.html', {'form': form, 'title': title})
 
+@login_required(login_url='login')
+def delete_business(request, id, bus_id):
+    business = Business.objects.get(id=bus_id)
+    business.delete_business()
+    messages.info(request, ('Business Deleted'))
+    return redirect('my_hood', id)
