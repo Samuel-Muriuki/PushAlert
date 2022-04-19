@@ -81,6 +81,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -91,6 +92,7 @@ WSGI_APPLICATION = 'Neighbourhood.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 # development
 if config('MODE')=="dev":
